@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectProducts.Domain.Interface
 {
-    public interface ICategoryDomain
+    public interface ICategoryService
     {
         void AddCategory(CategoryDTO category);
 

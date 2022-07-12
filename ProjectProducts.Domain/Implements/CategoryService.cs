@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProjectProducts.Domain.Implements
 {
-    public class CategoryDomain : ICategoryDomain
+    public class CategoryService : ICategoryService
     {
         public void AddCategory(CategoryDTO category)
         {

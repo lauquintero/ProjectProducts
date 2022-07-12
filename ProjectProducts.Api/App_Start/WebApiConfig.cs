@@ -1,9 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ProjectProducts.Data;
+using ProjectProducts.Data.Repository;
+using ProjectProducts.Data.Repository.Implements;
+using ProjectProducts.Domain.Implements;
+using ProjectProducts.Domain.Interface;
 using System.Web.Http;
+using Unity;
+using Unity.Injection;
+using Unity.Lifetime;
 
-namespace ProjectProducts
+namespace ProjectProducts.Api
 {
     public static class WebApiConfig
     {

@@ -10,26 +10,24 @@
 namespace ProjectProducts.Data
 {
     using System;
+    using System.Data.Common;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class ProductDBContext : DbContext
     {
         public ProductDBContext()
             : base("name=ProductDBContext")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Products> Products { get; set; }
 
-        public static ProductDBContext Create() {
-            return new ProductDBContext();
-        }
     }
 }

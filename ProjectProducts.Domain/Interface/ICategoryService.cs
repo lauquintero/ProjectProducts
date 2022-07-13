@@ -1,20 +1,19 @@
 ﻿using ProjectProducts.Domain.DTOs;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjectProducts.Domain.Interface
 {
     public interface ICategoryService
     {
-        void AddCategory(CategoryDTO category);
+        Task<CategoryDTO> AddCategory(CategoryDTO category);
 
-        void EditCategory(CategoryDTO category);
+        Task<CategoryDTO> EditCategory(CategoryDTO category);
 
-        void DeleteProduct(int categoryId);
+        Task DeleteCategory(int categoryId);
 
-        IEnumerable<CategoryDTO> GetAllCategory();
+        Task<IEnumerable<CategoryDTO>> GetAllCategoryAsync();
+
+        Task<CategoryDTO> GetCategoryByIdAsync(int id);
     }
 }

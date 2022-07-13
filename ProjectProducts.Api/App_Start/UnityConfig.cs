@@ -21,8 +21,13 @@ namespace ProjectProducts.Api
             // it is NOT necessary to register your controllers
 
             // e.g. container.RegisterType<ITestService, TestService>();
+            //Products
             container.RegisterType<IProductRepository, ProductRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IProductService, ProductService>(new HierarchicalLifetimeManager());
+            //Categories
+            container.RegisterType<ICategoryRepository, CategoryRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<ICategoryService, CategoryService>(new HierarchicalLifetimeManager());
+
 
             var config = new MapperConfiguration(cfg =>
             {

@@ -13,7 +13,7 @@ namespace ProjectProducts.Api.Controllers
     /// <summary>
     /// Products
     /// </summary>
-    [Route("Product")]
+    [Route("api/[controller]")]
     public class ProductController : ApiController
     {
         private readonly IProductService service;
@@ -40,14 +40,16 @@ namespace ProjectProducts.Api.Controllers
         /// Get products by category
         /// </summary>
         /// <param name="category">category Id</param>
+        /// <param name="page">number of page</param>
+        /// <param name="size">size page </param>
         /// <param name="descProductName">swich true for desc product name filter </param>
         /// <param name="descCategoryName">swich true for desc category name filter </param>
         /// <returns>list of Product</returns>
         [HttpGet]
         [Route("GetProductByCategory")]
-        public IHttpActionResult GetProductByCategory(int category, bool? descProductName = null, bool? descCategoryName = null)
+        public IHttpActionResult GetProductByCategory(int category, string page, string size, bool? descProductName = null, bool? descCategoryName = null)
         {
-            var data = service.GetProductByCategory(category, descProductName, descCategoryName);
+            var data = service.GetProductByCategory(category, page, size, descProductName, descCategoryName);
 
             return Ok(data);
         }
@@ -56,14 +58,16 @@ namespace ProjectProducts.Api.Controllers
         /// get product by catgory name
         /// </summary>
         /// <param name="name">category name</param>
+        /// <param name="page">number of page</param>
+        /// <param name="size">size page </param>
         /// <param name="descProductName">swich true for desc product name filter </param>
         /// <param name="descCategoryName">swich true for desc category name filter </param>
         /// <returns>list of Product</returns>
         [HttpGet]
         [Route("GetProductByCategoryName")]
-        public IHttpActionResult GetProductByCategoryName(string name, bool? descProductName = null, bool? descCategoryName = null)
+        public IHttpActionResult GetProductByCategoryName(string name, string page, string size, bool? descProductName = null, bool? descCategoryName = null)
         {
-            var data = service.GetProductByCategoryName(name, descProductName, descCategoryName);
+            var data = service.GetProductByCategoryName(name, page, size, descProductName, descCategoryName);
 
             return Ok(data);
         }
@@ -72,14 +76,16 @@ namespace ProjectProducts.Api.Controllers
         /// get products by description
         /// </summary>
         /// <param name="description">product description</param>
+        /// <param name="page">number of page</param>
+        /// <param name="size">size page </param>
         /// <param name="descProductName">swich true for desc product name filter </param>
         /// <param name="descCategoryName">swich true for desc category name filter </param>
         /// <returns>list of Product</returns>
         [HttpGet]
         [Route("GetProductByDescription")]
-        public IHttpActionResult GetProductByDescription(string description, bool? descProductName = null, bool? descCategoryName = null)
+        public IHttpActionResult GetProductByDescription(string description, string page, string size, bool? descProductName = null, bool? descCategoryName = null)
         {
-            var data = service.GetProductByDescription(description, descProductName, descCategoryName);
+            var data = service.GetProductByDescription(description, page, size, descProductName, descCategoryName);
 
             return Ok(data);
         }
@@ -93,7 +99,7 @@ namespace ProjectProducts.Api.Controllers
         [Route("GetProductById")]
         public async Task<IHttpActionResult> GetProductById(int product)
         {
-            var data = await service.GetProductById(product);
+            var data = await service.GetProductByIdAsync(product);
 
             return Ok(data);
         }
@@ -102,14 +108,16 @@ namespace ProjectProducts.Api.Controllers
         /// get products by product name
         /// </summary>
         /// <param name="name">Product name</param>
+        /// <param name="page">number of page</param>
+        /// <param name="size">size page </param>
         /// <param name="descProductName">swich true for desc product name filter </param>
         /// <param name="descCategoryName">swich true for desc category name filter </param>
         /// <returns>list of Product</returns>
         [HttpGet]
         [Route("GetProductByName")]
-        public IHttpActionResult GetProductByName(string name, bool? descProductName = null, bool? descCategoryName = null)
+        public IHttpActionResult GetProductByName(string name, string page, string size, bool? descProductName = null, bool? descCategoryName = null)
         {
-            var data = service.GetProductByName(name, descProductName, descCategoryName);
+            var data = service.GetProductByName(name, page, size, descProductName, descCategoryName);
 
             return Ok(data);
         }
@@ -121,7 +129,7 @@ namespace ProjectProducts.Api.Controllers
         /// <returns>if the object product is not ProductDTO type return bad request else return ok</returns>
         [HttpPost]
         [Route("AddProduct")]
-        public IHttpActionResult Post([FromBody] ProductDTO product)
+        public async Task<IHttpActionResult> Post([FromBody] ProductDTO product)
         {
             try
             {
@@ -132,7 +140,7 @@ namespace ProjectProducts.Api.Controllers
 
                 try
                 {
-                    service.AddProduct(product);
+                    await service.AddProduct(product);
                     return Ok();
                 }
                 catch (Exception ex)
@@ -154,7 +162,7 @@ namespace ProjectProducts.Api.Controllers
         /// <returns>if the object product is not ProductDTO type return bad request else return ok</returns>
         [HttpPut]
         [Route("EditProduct")]
-        public IHttpActionResult Put([FromBody] ProductDTO product)
+        public async Task<IHttpActionResult> Put([FromBody] ProductDTO product)
         {
             try
             {
@@ -165,7 +173,7 @@ namespace ProjectProducts.Api.Controllers
 
                 try
                 {
-                    service.EditProduct(product);
+                    await service.EditProduct(product);
                     return Ok();
                 }
                 catch (Exception ex)
@@ -188,11 +196,11 @@ namespace ProjectProducts.Api.Controllers
         /// <returns>if can delete the register , return ok</returns>
         [HttpDelete]
         [Route("DeleteProduct")]
-        public IHttpActionResult Delete(int id)
+        public async Task<IHttpActionResult> Delete(int id)
         {
             try
             {
-                service.DeleteProduct(id);
+                await service.DeleteProduct(id);
                 return Ok();
             }
             catch (Exception ex)

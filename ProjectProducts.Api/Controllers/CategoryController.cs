@@ -11,7 +11,7 @@ using System.Web.Http;
 namespace ProjectCategorys.Api.Controllers
 {
     /// <summary>
-    /// Products
+    /// Category
     /// </summary>
     [Route("api/[controller]")]
     public class CategoryController : ApiController
